@@ -1,0 +1,26 @@
+#!/bin/bash 
+echo -nE "Введіть назву об'єкту (назва повинна мати не менше 13 символів і 3 цифр підряд): "
+read firstname 
+if [[ -d $firstname ]] 
+then 
+  if [[ ${#firstname} -ge 13 || $firstname =~ [0-9]{3,} ]] 
+  then 
+    echo -nE "Введіть назву для заміни: " 
+    read secondname 
+      if [[ -d $secondname ]] 
+       then 
+        echo -E "Такий файл існує"
+       else 
+         if [[ ${#secondname} -ge 13 || $secondname =~ [0-9]{3,} ]]
+	    then
+ 	    mv "$firstname" "$secondname" 
+         else 
+         echo -E "Не відповідає умовам"
+         fi
+        fi 
+   else 
+   echo -E "Не відповідає умовам"
+       fi
+else 
+echo -E "Файл не знайдено"
+fi
